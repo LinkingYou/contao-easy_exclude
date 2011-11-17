@@ -1,0 +1,35 @@
+div.easyExclude
+{
+    border: 1px solid #FFFFFF;
+    margin-left: -2px;
+    position: relative;
+}
+
+/**
+ * Ugly hacks but there's no other way as some people sometimes forget to give both floating elements the class w50
+ * which leads to the problem that the right one overlaps the left one and therefore can't be edited anymore
+ */
+div.w50
+{
+    z-index: 50;
+}
+
+/*
+div.easyExclude:hover
+{
+    background: #ebfdd7;
+}
+*/
+
+input.easyExcludeCheckbox
+{
+    position:absolute;
+    top: 0px;
+    right: 0px;
+}
+
+div#easyExclude_container
+{
+    float: right;
+    margin: 4px 9px 0 10px;
+}
