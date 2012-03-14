@@ -37,5 +37,3 @@ $GLOBALS['TL_LANG']['tl_user']['easyExclude_enable']    = array('easyExclude akt
  * Legends
  */
 $GLOBALS['TL_LANG']['tl_user']['easyExclude_legend']    = 'easyExclude';
-
-?>

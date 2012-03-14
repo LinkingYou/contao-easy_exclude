@@ -279,5 +279,3 @@ class EasyExclude extends Backend
         }
     }
 }
-
-?>
