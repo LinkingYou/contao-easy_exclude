@@ -31,11 +31,11 @@
 /**
  * Table tl_user
  */
-$GLOBALS['TL_LANG']['tl_user']['easyExclude_enable']	= array('easyExclude aktivieren','Aktivieren Sie diese Checkbox, wenn Sie easyExclude verwenden möchten.');
+$GLOBALS['TL_LANG']['tl_user']['easyExclude_enable']    = array('easyExclude aktivieren','Aktivieren Sie diese Checkbox, wenn Sie easyExclude verwenden möchten.');
 
 /**
  * Legends
  */
-$GLOBALS['TL_LANG']['tl_user']['easyExclude_legend']	= 'easyExclude';
+$GLOBALS['TL_LANG']['tl_user']['easyExclude_legend']    = 'easyExclude';
 
 ?>

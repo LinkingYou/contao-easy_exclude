@@ -34,24 +34,24 @@
 // replace palettes
 foreach($GLOBALS['TL_DCA']['tl_user']['palettes'] as $palette =>$v)
 {
-	if($palette == '__selector__')
-	{
-		continue;
-	}
+    if($palette == '__selector__')
+    {
+        continue;
+    }
 
-	if($this->User->isAdmin)
-	{
-		$GLOBALS['TL_DCA']['tl_user']['palettes'][$palette] = str_replace('oldBeTheme;','oldBeTheme;{easyExclude_legend},easyExclude_enable;',$GLOBALS['TL_DCA']['tl_user']['palettes'][$palette]);
-	}        
+    if($this->User->isAdmin)
+    {
+        $GLOBALS['TL_DCA']['tl_user']['palettes'][$palette] = str_replace('backendTheme;','backendTheme;{easyExclude_legend},easyExclude_enable;',$GLOBALS['TL_DCA']['tl_user']['palettes'][$palette]);
+    }        
 }
 
 // add field
 $GLOBALS['TL_DCA']['tl_user']['fields']['easyExclude_enable'] = array
 (
-	'label'                   => &$GLOBALS['TL_LANG']['tl_user']['easyExclude_enable'],
-	'exclude'                 => true,
-	'inputType'               => 'checkbox',
-	'eval'					  => array('tl_class'=>'w50')
+    'label'                   => &$GLOBALS['TL_LANG']['tl_user']['easyExclude_enable'],
+    'exclude'                 => true,
+    'inputType'               => 'checkbox',
+    'eval'                      => array('tl_class'=>'w50')
 );
 
 ?>
