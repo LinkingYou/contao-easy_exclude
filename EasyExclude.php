@@ -85,17 +85,15 @@ class EasyExclude extends Backend
 		}
 		
 		$strSelect .= '</select></div>';
-		
-		// add javascript call
-		$arrTags = self::getScriptTags();
-		
-		$strSelect .=  $arrTags[0] . "window.addEvent('domready', function()
+		$strSelect .=  "<script>
+						window.addEvent('domready', function()
 						{
 							new EasyExclude(
 							{
 								table: '" . $GLOBALS['EasyExclude']['strTable'] . "'
 							});
-						});" . $arrTags[1];
+						});
+						</script>";
 		
 		return $strSelect;
 	}
@@ -246,36 +244,11 @@ class EasyExclude extends Backend
 	 */
 	private function outputAjax($varContent)
 	{
-		// return token from Contao 2.10 on
-		if (version_compare(VERSION.'.'.BUILD, '2.10.0', '>='))
-		{
-			echo json_encode(array
-			(
-				'content'	=> $varContent,
-				'token'		=> REQUEST_TOKEN
-			));
-		}
-		else
-		{
-			echo json_encode($varContent);
-		}
+		echo json_encode(array
+		(
+			'content'	=> $varContent,
+			'token'		=> REQUEST_TOKEN
+		));
 		exit;
-	}
-	
-	
-	/**
-	 * Get html & javascript tags depending on output format (Contao 2.10)
-	 * @return array
-	 */
-	public static function getScriptTags()
-	{
-		if (version_compare(VERSION.'.'.BUILD, '2.10.0', '>='))
-		{
-			return array('<script>', '</script>');
-		}
-		else
-		{
-			return array('<script type="text/javascript">'."\n".'<!--//--><![CDATA[//><!--' . "\n", '//--><!]]>'."\n".'</script>');
-		}
 	}
 }
