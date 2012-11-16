@@ -75,7 +75,7 @@ var EasyExclude = new Class({
 			url: window.location.href,
 			data: 'isAjax=1&action=easyExcludeGetFieldRights&usergroup=' + this.usergroup + '&table=' + this.options.table + '&REQUEST_TOKEN=' + REQUEST_TOKEN,
 			onRequest: function() {
-				AjaxRequest.displayBox('Loading data …');
+				AjaxRequest.displayBox(CONTAO_LOADING + ' …');
 			},
 			onComplete: function() {
 				AjaxRequest.hideBox();
@@ -141,13 +141,13 @@ var EasyExclude = new Class({
 			url: window.location.href,
 			data: 'isAjax=1&action=easyExcludeSaveChange&usergroup=' + this.usergroup + '&field=' + self.filterForFieldName(field.get('class')) + '&table=' + this.options.table + '&state=' + state + '&REQUEST_TOKEN=' + REQUEST_TOKEN,
 			onRequest: function() {
-				AjaxRequest.displayBox('Loading data …');
+				AjaxRequest.displayBox(CONTAO_LOADING + ' …');
 			},
 			onComplete: function() {
 				AjaxRequest.hideBox();
 			},
 			onFailure: function() {
-			alert('failed');
+				alert('failed');
 			},
 			onSuccess: function(responseJSON, responseText) {
 				// update the background color
