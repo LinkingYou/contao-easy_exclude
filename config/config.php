@@ -31,6 +31,6 @@
 /**
  * Hooks
  */
-$GLOBALS['TL_HOOKS']['outputBackendTemplate'][] = array('EasyExclude', 'addUsergroupSelect');
-$GLOBALS['TL_HOOKS']['loadDataContainer'][] = array('EasyExclude', 'addEasyExclude');
-$GLOBALS['TL_HOOKS']['executePostActions'][] = array('EasyExclude', 'doAjaxForMe');
+$GLOBALS['TL_HOOKS']['outputBackendTemplate'][]	= array('EasyExclude', 'addUsergroupSelect');
+$GLOBALS['TL_HOOKS']['loadDataContainer'][]		= array('EasyExclude', 'addEasyExclude');
+$GLOBALS['TL_HOOKS']['executePostActions'][]	= array('EasyExclude', 'doAjaxForMe');
