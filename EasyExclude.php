@@ -47,8 +47,8 @@ class EasyExclude extends Backend
 		parent::__construct();
 		$this->import('Input');
 	}
-	
-	
+
+
 	/**
 	 * HOOKED "outputBackendTemplate": Add the dropdown menu to choose the usergroup from
 	 * @param string
@@ -64,8 +64,8 @@ class EasyExclude extends Backend
 		 
 		return $strContent;
 	}
-	
-	
+
+
 	/**
 	 * Generates the dropdown box
 	 * @return string
@@ -97,8 +97,8 @@ class EasyExclude extends Backend
 		
 		return $strSelect;
 	}
-	
-	
+
+
 	/**
 	 * HOOKED "loadDataContainer": Add the classes to the fields, javascript and css file, onload_callback
 	 * @param string
@@ -111,7 +111,7 @@ class EasyExclude extends Backend
 			if(is_array($GLOBALS['TL_DCA'][$strTable]['fields']) && count($GLOBALS['TL_DCA'][$strTable]['fields']))
 			{
 				// add the global css and javascripts
-				$GLOBALS['TL_JAVASCRIPT'][] = 'system/modules/easy_exclude/html/easyExclude_src.js';
+				$GLOBALS['TL_JAVASCRIPT'][] = 'system/modules/easy_exclude/html/easyExclude.js';
 				$GLOBALS['TL_CSS'][]		= 'system/modules/easy_exclude/html/easyExclude.css|screen';
 			
 				// add classes to the fields
@@ -127,8 +127,8 @@ class EasyExclude extends Backend
 			}
 		}
 	}
-	
-	
+
+
 	/**
 	 * HOOKED "onload_callback": Check if instance of DC_Table and if so, set the global variable to true, so we can add the dropdown in the outputBackendTemplate hook
 	 * @param object
@@ -144,8 +144,8 @@ class EasyExclude extends Backend
 			$GLOBALS['EasyExclude']['strTable'] = $dc->table;
 		}
 	}
-	
-	
+
+
 	/**
 	 * Do some ajax things
 	 * @param string
@@ -232,10 +232,8 @@ class EasyExclude extends Backend
 		$this->import('BackendUser', 'User');
 
 		// the user has to be admin and enabled easyExclude
-		return ($this->User->isAdmin && $this->User->easyExclude_enable);	
+		return ($this->User->isAdmin && $this->User->easyExclude_enable);
 	}
-	
-	
 
 
 	/**
