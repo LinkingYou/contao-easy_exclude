@@ -21,8 +21,8 @@
  * Software Foundation website at <http://www.gnu.org/licenses/>.
  *
  * PHP version 5
- * @copyright  certo web & design GmbH 2010 - 2011
- * @author     Yanick Witschi <http://www.certo-net.ch>
+ * @copyright  terminal42 gmbh
+ * @author     Yanick Witschi <yanick.witschi@terminal42.ch>
  * @package    Backend
  * @license    LGPL
  * @filesource
