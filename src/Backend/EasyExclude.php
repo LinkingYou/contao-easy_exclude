@@ -1,4 +1,11 @@
-<?php if (!defined('TL_ROOT')) die('You cannot access this file directly!');
+<?php
+
+namespace EasyExclude\Backend;
+
+use Contao\Backend;
+use Contao\DC_Table;
+
+if (!defined('TL_ROOT')) die('You cannot access this file directly!');
 
 /**
  * Contao Open Source CMS
@@ -10,12 +17,12 @@
  * modify it under the terms of the GNU Lesser General Public
  * License as published by the Free Software Foundation, either
  * version 3 of the License, or (at your option) any later version.
- * 
+ *
  * This program is distributed in the hope that it will be useful,
  * but WITHOUT ANY WARRANTY; without even the implied warranty of
  * MERCHANTABILITY or FITNESS FOR A PARTICULAR PURPOSE. See the GNU
  * Lesser General Public License for more details.
- * 
+ *
  * You should have received a copy of the GNU Lesser General Public
  * License along with this program. If not, please visit the Free
  * Software Foundation website at <http://www.gnu.org/licenses/>.
@@ -27,10 +34,10 @@
  * @license    LGPL
  * @filesource
  */
-	
+
 
 /**
- * Class EasyExclude 
+ * Class EasyExclude
  *
  * @copyright  terminal42 gmbh
  * @author     Yanick Witschi <yanick.witschi@terminal42.ch>
@@ -59,9 +66,9 @@ class EasyExclude extends Backend
 	{
 		if($strTemplate == 'be_main' && $GLOBALS['EasyExclude']['addEasyExclude'])
 		{
-			$strContent = preg_replace('/(<h1 class="main_headline">[^<].*<\/h1>)/', "$1" . $this->generateUsergroupSelect(), $strContent);
+			$strContent = preg_replace('/(<h1 class="main_headline">.*<\/h1>)/', "$1" . $this->generateUsergroupSelect(), $strContent);
 		}
-		 
+
 		return $strContent;
 	}
 
@@ -72,19 +79,19 @@ class EasyExclude extends Backend
 	 */
 	private function generateUsergroupSelect()
 	{
-		$strSelect = '<div id="easyExclude_container"><select id="easyExclude_usergroup" name="easyExclude_usergroup" class="tl_select">';
-		
+		$strSelect = '<div class="tl_panel"><div class=" tl_subpanel"><strong>EasyExclude Gruppe:</strong> <div id="easyExclude_container"><select id="easyExclude_usergroup" name="easyExclude_usergroup" class="tl_select">';
+
 		$objGroups = $this->Database->query("SELECT id,name FROM tl_user_group WHERE disable!=1");
-		
+
 		// default is none
 		$strSelect .= '<option value="0">-</option>';
-		
+
 		while ($objGroups->next())
 		{
 			$strSelect .= '<option value="' . $objGroups->id . '">' . $objGroups->name . '</option>';
 		}
-		
-		$strSelect .= '</select></div>';
+
+		$strSelect .= '</select></div></div><div class="clear"></div></div>';
 		$strSelect .=  "<script>
 						window.addEvent('domready', function()
 						{
@@ -94,7 +101,7 @@ class EasyExclude extends Backend
 							});
 						});
 						</script>";
-		
+
 		return $strSelect;
 	}
 
@@ -111,19 +118,19 @@ class EasyExclude extends Backend
 			if(is_array($GLOBALS['TL_DCA'][$strTable]['fields']) && count($GLOBALS['TL_DCA'][$strTable]['fields']))
 			{
 				// add the global css and javascripts
-				$GLOBALS['TL_JAVASCRIPT'][] = 'system/modules/easy_exclude/html/easyExclude.js';
-				$GLOBALS['TL_CSS'][]		= 'system/modules/easy_exclude/html/easyExclude.css|screen';
-			
+				$GLOBALS['TL_JAVASCRIPT'][] = 'bundles/easyexclude/assets/easyExclude_src.js|static';
+				$GLOBALS['TL_CSS'][]		= 'bundles/easyexclude/assets/easyExclude.css|screen';
+
 				// add classes to the fields
 				$arrFields = array_keys($GLOBALS['TL_DCA'][$strTable]['fields']);
-				
+
 				foreach($arrFields as $field)
 				{
-					$GLOBALS['TL_DCA'][$strTable]['fields'][$field]['eval']['tl_class'] .= trim($GLOBALS['TL_DCA'][$strTable]['fields'][$field]['eval']['tl_class'] . ' easyExclude easyExcludeFN_' . $field);				
+					$GLOBALS['TL_DCA'][$strTable]['fields'][$field]['eval']['tl_class'] = trim($GLOBALS['TL_DCA'][$strTable]['fields'][$field]['eval']['tl_class'] . ' easyExclude easyExcludeFN_' . $field);
 				}
-				
+
 				// add the onload_callback where we get the $dc object and can check whether it's an instance of DC_Table or not
-				$GLOBALS['TL_DCA'][$strTable]['config']['onload_callback'][] = array('EasyExclude', 'checkIfDCTableInstance');
+				$GLOBALS['TL_DCA'][$strTable]['config']['onload_callback'][] = array('EasyExclude\\Backend\\EasyExclude', 'checkIfDCTableInstance');
 			}
 		}
 	}
@@ -133,12 +140,12 @@ class EasyExclude extends Backend
 	 * HOOKED "onload_callback": Check if instance of DC_Table and if so, set the global variable to true, so we can add the dropdown in the outputBackendTemplate hook
 	 * @param object
 	 */
-	public function checkIfDCTableInstance(DataContainer $dc)
+	public function checkIfDCTableInstance(DC_Table $dc)
 	{
 		$GLOBALS['EasyExclude']['addEasyExclude'] = false;
-			
+
 		if($dc instanceof DC_Table && $this->Input->get('act') == 'edit')
-		{			
+		{
 			// globals to enable easy_exclude
 			$GLOBALS['EasyExclude']['addEasyExclude'] = true;
 			$GLOBALS['EasyExclude']['strTable'] = $dc->table;
@@ -151,7 +158,7 @@ class EasyExclude extends Backend
 	 * @param string
 	 * @param object
 	 */
-	public function doAjaxForMe($strAction, DataContainer $dc)
+	public function doAjaxForMe($strAction, DC_Table $dc)
 	{
 		/**
 		 * This action gets a list of all fields that the usergroup has access to
@@ -160,18 +167,22 @@ class EasyExclude extends Backend
 		{
 			$objAlexf = $this->Database->prepare("SELECT alexf FROM tl_user_group WHERE id=?")->limit(1)->execute($this->Input->post('usergroup'));
 			$arrAlexf = deserialize($objAlexf->alexf);
-			
-			$arrAllowedFields = array();
-			$key = $this->Input->post('table') . '::';
 
-			foreach($arrAlexf as $field)
-			{
-				if(strpos($field, $key) !== false)
-				{
-					$arrAllowedFields[] = str_replace($key, '', $field);
-				}
-			}
-			
+            $arrAllowedFields = array();
+
+			if ($arrAlexf) {
+                $key = $this->Input->post('table') . '::';
+
+                foreach($arrAlexf as $field)
+                {
+                    if(strpos($field, $key) !== false)
+                    {
+                        $arrAllowedFields[] = str_replace($key, '', $field);
+                    }
+                }
+
+            }
+
 			// prevent returning "Array" instead of an empty output
 			if (!count($arrAllowedFields))
 			{
@@ -187,7 +198,7 @@ class EasyExclude extends Backend
 
 			 $this->outputAjax($arrAllowedFields);
 		}
-		
+
 		/**
 		 * This action stores the changes made for a certain field
 		 */
@@ -195,7 +206,7 @@ class EasyExclude extends Backend
 		{
 			$uid = $this->Input->post('usergroup');
 			$state = $this->Input->post('state');
-			
+
 			$key = $this->Input->post('table') . '::' . $this->Input->post('field');
 
 			$arrAlexf = array();
@@ -207,16 +218,16 @@ class EasyExclude extends Backend
 			{
 				unset($arrAlexf[array_search($key, $arrAlexf)]);
 			}
-			
+
 			// add
 			if($state == 1)
 			{
 				$arrAlexf[] = $key;
 			}
-			
+
 			// update
-			$this->Database->prepare("UPDATE tl_user_group SET alexf=? WHERE id=?")->execute(serialize($arrAlexf), $uid);	
-			
+			$this->Database->prepare("UPDATE tl_user_group SET alexf=? WHERE id=?")->execute(serialize($arrAlexf), $uid);
+
 			// output anyway because Contao wants the token
 			$this->outputAjax('');
 		}

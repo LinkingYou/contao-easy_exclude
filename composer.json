@@ -1,0 +1,33 @@
+{
+    "name": "terminal42/easy_exclude",
+    "type": "contao-bundle",
+    "license":"LGPL",
+    "authors": [
+        {
+            "name": "Yanick Witschi",
+            "email": "yanick.witschi@terminal42.ch",
+            "role": "Developer"
+        },
+        {
+            "name": "Frank Mueller",
+            "email": "frank.mueller@linking-you.de",
+            "homepage": "http://www.linking-you.de",
+            "role": "Developer (Anpassungen an Contao 4.4)"
+        }
+    ],
+    "require": {
+        "contao/core-bundle": "^4.4",
+        "contao-community-alliance/composer-plugin":"~2.4 || ~3.0"
+    },
+    "require-dev": {
+        "contao/manager-plugin": "^2.0"
+    },
+    "autoload": {
+        "psr-4": {
+            "EasyExclude\\": "src/"
+        }
+    },
+    "extra" : {
+        "contao-manager-plugin": "EasyExclude\\ContaoManager\\Plugin"
+    }
+}

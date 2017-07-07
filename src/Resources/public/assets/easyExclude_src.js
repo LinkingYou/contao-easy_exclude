@@ -23,6 +23,8 @@
  * @author     Yanick Witschi <yanick.witschi@terminal42.ch>
  */
 
+const REQUEST_TOKEN = Contao.request_token;
+const CONTAO_LOADING = 'Loading data';
 
 /**
  * Class EasyExclude
