@@ -1,18 +1,13 @@
 {
-    "name": "terminal42/easy_exclude",
+    "name": "linking-you/easy_exclude",
     "type": "contao-bundle",
-    "license":"LGPL",
+    "license":"LGPL v3",
     "authors": [
-        {
-            "name": "Yanick Witschi",
-            "email": "yanick.witschi@terminal42.ch",
-            "role": "Developer"
-        },
         {
             "name": "Frank Mueller",
             "email": "frank.mueller@linking-you.de",
             "homepage": "http://www.linking-you.de",
-            "role": "Developer (Anpassungen an Contao 4.4)"
+            "role": "Developer"
         }
     ],
     "require": {
