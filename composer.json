@@ -1,5 +1,6 @@
 {
     "name": "linking-you/easy_exclude",
+    "description": "Erleichtert die Rechteverwaltung für Benutzergruppen im Backend",
     "type": "contao-bundle",
     "license":"LGPL v3",
     "authors": [
