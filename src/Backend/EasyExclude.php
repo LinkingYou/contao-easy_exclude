@@ -96,7 +96,7 @@ class EasyExclude extends Backend
 			if(is_array($GLOBALS['TL_DCA'][$strTable]['fields']) && count($GLOBALS['TL_DCA'][$strTable]['fields']))
 			{
 				// add the global css and javascripts
-				$GLOBALS['TL_JAVASCRIPT'][] = 'bundles/easyexclude/assets/easyExclude_src.js|static';
+				$GLOBALS['TL_JAVASCRIPT'][] = 'bundles/easyexclude/assets/easyExclude_src.min.js|static';
 				$GLOBALS['TL_CSS'][]		= 'bundles/easyexclude/assets/easyExclude.css|screen';
 
 				// add classes to the fields

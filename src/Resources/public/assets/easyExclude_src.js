@@ -24,7 +24,6 @@ var EasyExclude = new Class({
 	usergroup: 0,
 	checkboxes: {},
 
-
 	initialize: function(options) {
 		var self = this;
 		this.setOptions(options);
@@ -44,6 +43,7 @@ var EasyExclude = new Class({
 				self.cleanTheScreen();
 			}
 		});
+
 
 		// how great we have a hook to register functions upon the event that occurs whenever a subpalette is being loaded!!
 		window.addEvent('subpalette', function() {
