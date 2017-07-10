@@ -1,5 +1,12 @@
 <?php
 
+/**
+ * EasyExclude Extension for Contao Open Source CMS
+ *
+ * @author     Frank Müller <frank.mueller@linking-you.de>
+ * @license    http://opensource.org/licenses/lgpl-3.0.html LGPL
+ */
+
 namespace EasyExclude\ContaoManager;
 
 use Contao\CoreBundle\ContaoCoreBundle;
