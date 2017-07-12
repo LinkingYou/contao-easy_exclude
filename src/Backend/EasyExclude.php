@@ -118,7 +118,7 @@ class EasyExclude extends Backend
 	 * HOOKED "onload_callback": Check if instance of DC_Table and if so, set the global variable to true, so we can add the dropdown in the outputBackendTemplate hook
 	 * @param object
 	 */
-	public function checkIfDCTableInstance(DC_Table $dc)
+	public function checkIfDCTableInstance($dc)
 	{
 		$GLOBALS['EasyExclude']['addEasyExclude'] = false;
 
