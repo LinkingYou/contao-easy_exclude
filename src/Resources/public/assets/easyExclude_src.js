@@ -2,7 +2,7 @@
  * EasyExclude Extension for Contao Open Source CMS
  *
  * @author     Frank Müller <frank.mueller@linking-you.de>
- * @license    http://opensource.org/licenses/lgpl-3.0.html LGPL
+ * @license    LGPL-3.0+
  */
 
 const REQUEST_TOKEN = Contao.request_token;

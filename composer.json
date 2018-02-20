@@ -2,7 +2,7 @@
     "name": "linking-you/easy_exclude",
     "description": "Erleichtert die Rechteverwaltung für Benutzergruppen im Backend",
     "type": "contao-bundle",
-    "license":"LGPL v3",
+    "license":"LGPL-3.0-or-later",
     "authors": [
         {
             "name": "Frank Mueller",
