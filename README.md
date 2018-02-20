@@ -28,4 +28,4 @@ Hinter den jeweiligen Eingabefeldern findet man nun Checkboxen zum Aktivieren od
 License
 -------
 
-LGPL v3
+LGPL-3.0+
