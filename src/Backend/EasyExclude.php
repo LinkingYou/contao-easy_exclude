@@ -3,6 +3,7 @@
 /**
  * EasyExclude Extension for Contao Open Source CMS
  *
+ * @author     Yanick Witschi <yanick.witschi@terminal42.ch>
  * @author     Frank Müller <frank.mueller@linking-you.de>
  * @license    LGPL-3.0+
  */
@@ -14,13 +15,6 @@ use Contao\DC_Table;
 
 if (!defined('TL_ROOT')) die('You cannot access this file directly!');
 
-/**
- * Class EasyExclude
- *
- * @copyright  terminal42 gmbh
- * @author     Yanick Witschi <yanick.witschi@terminal42.ch>
- * @package    easyExclude
- */
 class EasyExclude extends Backend
 {
 
@@ -44,7 +38,7 @@ class EasyExclude extends Backend
 	{
 		if($strTemplate == 'be_main' && $GLOBALS['EasyExclude']['addEasyExclude'])
 		{
-			$strContent = preg_replace('/(<h1 class="main_headline">.*<\/h1>)/', "$1" . $this->generateUsergroupSelect(), $strContent);
+			$strContent = preg_replace('/(<h1 id="main_headline">.*<\/h1>)/', "$1" . $this->generateUsergroupSelect(), $strContent);
 		}
 
 		return $strContent;
