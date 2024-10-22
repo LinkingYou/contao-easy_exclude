@@ -36,7 +36,7 @@ class EasyExclude extends Backend
 	 */
 	public function addUsergroupSelect($strContent, $strTemplate)
 	{
-		if($strTemplate == 'be_main' && $GLOBALS['EasyExclude']['addEasyExclude'])
+		if($strTemplate == 'be_main' && isset($GLOBALS['EasyExclude']['addEasyExclude']) && $GLOBALS['EasyExclude']['addEasyExclude'])
 		{
 			$strContent = preg_replace('/(<h1 id="main_headline">.*<\/h1>)/', "$1" . $this->generateUsergroupSelect(), $strContent);
 		}
@@ -90,14 +90,20 @@ class EasyExclude extends Backend
 			if(is_array($GLOBALS['TL_DCA'][$strTable]['fields']) && count($GLOBALS['TL_DCA'][$strTable]['fields']))
 			{
 				// add the global css and javascripts
-				$GLOBALS['TL_JAVASCRIPT'][] = 'bundles/easyexclude/assets/easyExclude_src.min.js|static';
-				$GLOBALS['TL_CSS'][]		= 'bundles/easyexclude/assets/easyExclude.css|screen';
+				if(TL_MODE == 'BE'){
+					$GLOBALS['TL_JAVASCRIPT'][] = 'bundles/easyexclude/assets/easyExclude_src.min.js|static';
+					$GLOBALS['TL_CSS'][]	    = 'bundles/easyexclude/assets/easyExclude.css|screen';
+				}
 
 				// add classes to the fields
 				$arrFields = array_keys($GLOBALS['TL_DCA'][$strTable]['fields']);
 
 				foreach($arrFields as $field)
 				{
+          if(!isset($GLOBALS['TL_DCA'][$strTable]['fields'][$field]['eval']['tl_class']))
+          {
+            continue;
+          }
 					$GLOBALS['TL_DCA'][$strTable]['fields'][$field]['eval']['tl_class'] = trim($GLOBALS['TL_DCA'][$strTable]['fields'][$field]['eval']['tl_class'] . ' easyExclude easyExcludeFN_' . $field);
 				}
 
